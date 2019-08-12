@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<!--
+	Gaming Get - distributed
+
+	IF YOU ARE AT FRIDAY NIGHT GAMING, QUIT MESSING WITH THE MACHINE AND PLAY SOME GAMES
+
+	Built by Amelie [Surname] for the University of Warwick Computing Society
+	Report bugs to @distributive law#5486 at discord.gg/uwcs or techteam@uwcs.co.uk.
+-->
+<html>
+	<head>
+	<title>Gaming Get - distributed</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="static/css/main.css" />
+
+		<!-- Favicons -->
+		<link rel="icon" sizes="228x228" href="static/favicon-228.png">
+		<link rel="icon" sizes="128x128" href="static/favicon-128.png">
+		<link rel="icon" sizes="96x96" href="static/favicon-96.png">
+		<link rel="icon" sizes="32x32" href="static/favicon-32.png">
+		<link rel="shortcut icon" sizes="196x196" href="static/favicon-196.png">
+
+		<!-- FontAwesome -->
+		<script src="https://kit.fontawesome.com/13a6fc8427.js"></script>
+
+		<!-- Google Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+		<!-- Local scripts -->
+		<script type="text/javascript" src="static/js/search.js"></script>
+	</head>
+
+  <body>
+		<main class="disable-select">
+			<div class="sidebar">
+				<div class="title centred">
+					<!--<h1 class="title">Gaming Get</h1>
+					<h2 class="subtitle">distributed</h2>-->
+					<img src="static/img/logo.png" draggable="false">
+				</div>
+
+				<div class="search-bar-container sidebar-block">
+					<!--<h4 class="centred">Search</h4>-->
+  				<input type="text" placeholder="Search..." class="search-bar centred">
+				</div>
+
+				<div class="utilities sidebar-block">
+					<h4 class="centred">Utilities</h4>
+					<button type="button" class="centred button-blue">Steam<i class="fab fa-steam"></i></i></button>
+					<button type="button" class="centred button-blue">New Chrome Window<i class="fab fa-chrome"></i></button>
+					<button type="button" class="centred button-grey">Volume Controls</button>
+					<button type="button" class="centred button-grey">Mouse Controls</button>
+					<button type="button" class="centred button-grey">Fix Resolution</button>
+				</div>
+			</div>
+
+			<div class="games" id="games-list">
+				@games
+			</div>
+    </main>
+  </body>
+</html>
