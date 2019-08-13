@@ -15,7 +15,6 @@ discord.gg/uwcs (report bugs to @distributive law#5486)
 ## Todo list
 
 * Implement functionality
-* Add parameter to main.py to prevent automatically opening the page
 * Add yellow
 
 ## License
