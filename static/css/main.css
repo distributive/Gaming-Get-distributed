@@ -144,11 +144,12 @@ button:active {
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--warwickgg_light_blue);
+  background: clear;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--warwickgg_dark_grey);
+  background: var(--ticket-bg);
+  border-radius: 20px;
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
