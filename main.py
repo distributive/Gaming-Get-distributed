@@ -5,7 +5,7 @@ import re
 import webbrowser
 
 # Check for command-line arguments
-noLoad = filter (lambda arg : arg in ("-n", "--no-load"), sys.argv) # Not technically a bool
+noLoad = len (list (filter (lambda arg : arg in ("-n", "--no-load"), sys.argv))) > 0
 
 # Load templates
 with open ("templates/index.tmpl", 'r') as file:
