@@ -1,11 +1,11 @@
+import sys
 import os
 import json
 import re
-#import tempfile
 import webbrowser
 
-# Store all tags specified by games
-tags = set
+# Check for command-line arguments
+noLoad = filter (lambda arg : arg in ("-n", "--no-load"), sys.argv) # Not technically a bool
 
 # Load templates
 with open ("templates/index.tmpl", 'r') as file:
@@ -37,9 +37,10 @@ for game in games:
 html = re.sub ("@games", gameHTML, htmlTemplate)
 
 # Open page
-with open ("temp.html", "w") as file:
-    url = "file://" + os.getcwd () + "/temp.html"
-    file.write (html)
-chrome_path = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-webbrowser.register ("chrome", None, webbrowser.BackgroundBrowser (chrome_path))
-webbrowser.get ("chrome").open (url)
+if (not noLoad):
+    with open ("temp.html", "w") as file:
+        url = "file://" + os.getcwd () + "/temp.html"
+        file.write (html)
+    chrome_path = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+    webbrowser.register ("chrome", None, webbrowser.BackgroundBrowser (chrome_path))
+    webbrowser.get ("chrome").open (url)
