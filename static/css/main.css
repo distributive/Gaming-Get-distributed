@@ -189,7 +189,7 @@ button:active {
 
 .sidebar-block {
   width: 80%;
-  margin-top: 2em;
+  margin-top: 3em;
   margin-right: auto;
   margin-left: auto;
 }
@@ -228,9 +228,14 @@ button:active {
 
   color: white;
   background-color: var(--warwickgg_dark_grey);
+
+  transition: width 0.8s;
 }
 ::-webkit-input-placeholder {  /* Chrome/Opera/Safari */
   color: white;
+}
+.search-bar:focus {
+  width: 80%;
 }
 /* Sidebar END */
 
@@ -247,7 +252,7 @@ button:active {
   margin: 0 0 0 var(--sidebar-width);
   padding: 2em 0 0 0;
 
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .game-ticket {
