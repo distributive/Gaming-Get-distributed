@@ -303,22 +303,20 @@ button:active {
 }
 
 .game-ticket-content p {
-  /*margin-bottom: 5.7em;*/
+  flex-grow: 1;
   color: var(--ticket-body);
 }
 
 .game-ticket-footer {
-  position: absolute;
   display: flex;
   justify-content: space-between;
   left: 0;
-  padding-left: 1em;
   right: 0;
   bottom: 0;
 }
 
 .game-ticket-tags {
-  margin: 0;
+  margin: 0 0.2em 0 0;
   padding: 0;
   flex-wrap: wrap;
 }
@@ -345,7 +343,7 @@ button:active {
 .game-ticket-button-container button {
   position: absolute;
   bottom: 0;
-  width: 100%;
   height: 3em;
+  width: 100%;
 }
 /* Game tickets END */
