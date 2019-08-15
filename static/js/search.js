@@ -1,4 +1,3 @@
-
 $(document).ready (function () {
 
   $("#search-bar").on ("input", function () {

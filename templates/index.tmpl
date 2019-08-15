@@ -34,6 +34,7 @@
 
 		<!-- Local scripts -->
 		<script type="text/javascript" src="static/js/search.js"></script>
+		<script type="text/javascript" src="static/js/sidebar.js"></script>
 	</head>
 
   <body>
@@ -42,7 +43,7 @@
 				<div class="title centred">
 					<!--<h1 class="title">Gaming Get</h1>
 					<h2 class="subtitle">distributed</h2>-->
-					<img src="static/img/logo.png" draggable="false">
+					<img src="static/img/logo.png" draggable="false" />
 				</div>
 
 				<div class="search-bar-container sidebar-block">
@@ -52,17 +53,17 @@
 
 				<div class="utilities sidebar-block">
 					<h4 class="centred">Utilities</h4>
-					<button type="button" class="centred button-blue">Steam<i class="fab fa-steam"></i></button>
-					<button type="button" class="centred button-blue">New Chrome Window<i class="fab fa-chrome"></i></button>
-					<button type="button" class="centred button-grey">Volume Controls</button>
-					<button type="button" class="centred button-grey">Mouse Controls</button>
-					<button type="button" class="centred button-grey">Fix Resolution</button>
+					<button type="button" class="centred button-blue" id="button-steam">Steam<i class="fab fa-steam"></i></button>
+					<button type="button" class="centred button-blue" id="button-chrome">New Chrome Window<i class="fab fa-chrome"></i></button>
+					<button type="button" class="centred button-grey" id="button-volume">Volume Controls</button>
+					<button type="button" class="centred button-grey" id="button-mouse">Mouse Controls</button>
+					<button type="button" class="centred button-grey" id="button-resolution">Fix Resolution</button>
 				</div>
 
 				<div class="links sidebar-block">
 					<h4 class="centred">Links</h4>
-					<button type="button" class="centred button-blue">Food Orders</button>
-					<button type="button" class="centred button-grey">Vive Waiting List</button>
+					<button type="button" class="centred button-blue" id="button-vive">Sign Up For The Vive</button>
+					<button type="button" class="centred button-grey" id="button-food">Food Orders</button>
 				</div>
 			</div>
 
@@ -70,5 +71,65 @@
 				@games
 			</div>
     </main>
+
+		<div class="pop-up-background close-pop-up disable-select">
+			<div class="pop-up-window" id="food-redirect">
+				<h4>Join our Discord</h4>
+				<div class="pop-up-window-content">
+					<img src="https://cdn.discordapp.com/icons/189453139584221185/a_d8c9f421b8c23b26788904063b79fe25.gif?size=256" draggable="false" />
+					<p>Our Discord server has a channel for organising food orders with others at events. Just look for #food-orders under the Gaming category in the channel list and ask away!</p>
+				</div>
+				<button type="button" class="centred button-blue" id="button-discord">Join</button>
+			</div>
+
+			<div class="pop-up-window" id="vive-list">
+				<h4>The Vive Waiting List</h4>
+				<div class="pop-up-window-content">
+					<p>Vive sessions usually last 10 minutes depending on demand. Once you are signed up you will be added to the end of the queue; if you do not turn up to your slot you may be skipped. Exec reserve the right to refuse entry to anyone at their own discretion.</p>
+					<div class="sign-up-container">
+						<input type="text" id="vive-name-input" placeholder="Your name here..." />
+						<button type="button" class="button-blue out-queue" id="button-vive-sign-up">Sign Up</button>
+					</div>
+					<h5>Current User</h5>
+					<div class="queue-ticket">
+						Name McNamerson
+					</div>
+					<h5>Up Next</h5>
+					<div class="queue-ticket">
+						Namey McNameface
+					</div>
+					<h5>Queue</h5>
+					<div class="vive-queue">
+						<div class="queue-ticket">
+							Jimmy Fakename
+						</div>
+						<div class="queue-ticket">
+							Old Man McGee
+						</div>
+						<div class="queue-ticket">
+							Carl B. Frank
+						</div>
+						<div class="queue-ticket">
+							Sam "lIgHT tHemE" Coy
+						</div>
+						<div class="queue-ticket">
+							div content
+						</div>
+						<div class="queue-ticket">
+							Wanker
+						</div>
+						<div class="queue-ticket">
+							Name McNamerson
+						</div>
+						<div class="queue-ticket">
+							Name McNamerson
+						</div>
+						<div class="queue-ticket">
+							Name McNamerson
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
   </body>
 </html>
