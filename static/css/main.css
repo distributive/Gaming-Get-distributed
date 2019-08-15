@@ -383,8 +383,10 @@ button:active {
 }
 
 .pop-up-window {
-  position: relative;
-  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   width: 24em;
   padding: 1.25em 2em;
