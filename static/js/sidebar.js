@@ -4,6 +4,12 @@ $(document).ready (function () {
   $(".pop-up-background").hide (100);
   $(".pop-up-window").hide (200);
 
+  // Function for closing the current pop-up
+  function closePopUps () {
+    $(".pop-up-background").fadeOut (100);
+    $(".pop-up-window").fadeOut (200);
+  };
+
 
 
   /* Button events */
@@ -33,6 +39,7 @@ $(document).ready (function () {
   });
   $("#button-discord").click (function () {
     window.open ("https://discord.gg/uwcs", "window name", "window settings");
+    window.setTimeout (closePopUps, 500);
   });
 
   $("#button-vive").click (function () {
@@ -99,10 +106,7 @@ $(document).ready (function () {
     e.stopPropagation();
   });
 
-  $(".close-pop-up").click (function () {
-    $(".pop-up-background").fadeOut (100);
-    $(".pop-up-window").fadeOut (200);
-  });
+  $(".close-pop-up").click (closePopUps);
   /* Button events END */
 
 });
