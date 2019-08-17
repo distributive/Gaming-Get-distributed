@@ -157,23 +157,27 @@ button:active {
 
 
 /* Scrollbar */
-/* width */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
-/* Track */
 ::-webkit-scrollbar-track {
-  background: clear;
+  background-color: clear;
 }
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--ticket-bg);
+  background-color: var(--ticket-bg);
   border-radius: 20px;
 }
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--warwickgg_black);
+  background-color: var(--warwickgg_black);
+}
+
+#vive-queue::-webkit-scrollbar-thumb {
+  background-color: var(--warwickgg_dark_grey);
+  border-radius: 20px;
+}
+#vive-queue::-webkit-scrollbar-thumb:hover {
+  background-color: var(--warwickgg_black);
 }
 /* Scrollbar END */
 
@@ -490,7 +494,7 @@ button:active {
   width: 12em;
 }
 
-.vive-queue {
+#vive-queue {
   width: 90%;
   height: 20em;
   margin: 1em auto 0 auto;

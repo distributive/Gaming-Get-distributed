@@ -15,6 +15,7 @@ discord.gg/uwcs (report bugs to @distributive law#5486)
 ## Todo list
 
 * Implement functionality
+* Add responsive detection of duplicate names in the Vive queue
 * Add yellow
 
 ## License

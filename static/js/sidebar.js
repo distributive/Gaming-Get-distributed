@@ -49,58 +49,6 @@ $(document).ready (function () {
 
 
 
-  // Sign up button (Vive)
-  var viveSignUpFunc = function () {
-    if ($("#vive-name-input").val ().trim () != "")
-    {
-      // Toggle visuals
-      $("#vive-name-input").prop ("disabled", true);
-      $("#button-vive-sign-up").text ("Leave Queue");
-      $("#button-vive-sign-up").removeClass ("out-queue");
-      $("#button-vive-sign-up").addClass ("in-queue");
-      $("#button-vive-sign-up").removeClass ("button-blue");
-      $("#button-vive-sign-up").addClass ("button-red");
-      $("#vive-name-input").removeClass ("invalid");
-
-      // Toggle function
-      $("#button-vive-sign-up").click (viveLeaveFunc);
-
-      // Disable button for cooldown
-      $("#button-vive-sign-up").prop ("disabled", true);
-      window.setTimeout (function () {
-        $("#button-vive-sign-up").prop("disabled", false);
-      }, 1000);
-    }
-    else
-    {
-      $("#vive-name-input").addClass ("invalid");
-    }
-  };
-
-  var viveLeaveFunc = function () {
-    // Toggle visuals
-    $("#vive-name-input").prop ("disabled", false);
-    $("#button-vive-sign-up").text ("Sign Up");
-    $("#button-vive-sign-up").removeClass ("in-queue");
-    $("#button-vive-sign-up").addClass ("out-queue");
-    $("#button-vive-sign-up").removeClass ("button-red");
-    $("#button-vive-sign-up").addClass ("button-blue");
-
-    // Toggle function
-    $("#button-vive-sign-up").click (viveSignUpFunc);
-
-    // Disable button for cooldown
-    $("#button-vive-sign-up").prop ("disabled", true);
-    window.setTimeout (function () {
-      $("#button-vive-sign-up").prop("disabled", false);
-    }, 1000);
-  };
-
-  $("#button-vive-sign-up.out-queue").click (viveSignUpFunc);
-  $("#vive-name-input").change (viveSignUpFunc);
-
-
-
   // Pop-up windows
   $(".pop-up-window").on ("click", function (e) {
     e.stopPropagation();
