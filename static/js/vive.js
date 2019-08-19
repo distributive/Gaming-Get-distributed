@@ -25,7 +25,7 @@ $(document).ready (function () {
       // Disable button for cooldown
       $("#button-vive-sign-up").prop ("disabled", true);
       window.setTimeout (function () {
-        $("#button-vive-sign-up").prop("disabled", false);
+        $("#button-vive-sign-up").prop ("disabled", false);
       }, 500);
     }
     else
@@ -55,7 +55,7 @@ $(document).ready (function () {
     // Disable button for cooldown
     $("#button-vive-sign-up").prop ("disabled", true);
     window.setTimeout (function () {
-      $("#button-vive-sign-up").prop("disabled", false);
+      $("#button-vive-sign-up").prop ("disabled", false);
     }, 500);
   };
 

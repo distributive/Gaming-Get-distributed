@@ -296,7 +296,7 @@ button:active {
   border-radius: 1px;
 }
 
-.game-ticket img {
+.game-icon {
   height: 13em;
   width: 13em;
   display: block;
@@ -369,6 +369,15 @@ button:active {
   bottom: 0;
   height: 3em;
   width: 100%;
+}
+
+.game-button.installed {
+  width: 60%;
+  right: 0;
+}
+
+.play-symbol {
+  width: 1.3em;
 }
 /* Game tickets END */
 
