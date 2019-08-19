@@ -371,12 +371,23 @@ button:active {
   width: 100%;
 }
 
+.game-button {
+  position: relative;
+  transition: width 0.5s;
+  transition-timing-function: ease-out;
+}
+
 .game-button.installed {
   width: 60%;
   right: 0;
 }
 
 .play-symbol {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  transform: translate(-50%, 0);
   width: 1.3em;
 }
 /* Game tickets END */
