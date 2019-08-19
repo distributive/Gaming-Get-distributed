@@ -517,5 +517,23 @@ button:active {
   border-radius: 6px;
   background-color: var(--warwickgg_dark_grey);
 }
-
 /* Pop-ups END */
+
+
+
+/* Notifications */
+.notification-icon {
+  display: none;
+  position: absolute;
+  width: 1.55em;
+  height: 1.55em;
+
+  left: 100%;
+  bottom: 100%;
+  transform: translate(-50%, 50%);
+
+  color: white;
+  border-radius: 20px;
+  background-color: red;
+}
+/* Notifications END */

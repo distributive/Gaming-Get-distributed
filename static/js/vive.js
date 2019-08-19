@@ -15,6 +15,9 @@ $(document).ready (function () {
       $("#button-vive-sign-up").addClass ("button-red");
       $("#vive-name-input").removeClass ("invalid");
 
+      // Toggle Vive sidebar button
+      $("#button-vive").text ("Waiting For The Vive ()");
+
       // Toggle function
       $("#button-vive-sign-up").off ();
       $("#button-vive-sign-up").click (viveLeaveFunc);
@@ -41,6 +44,9 @@ $(document).ready (function () {
     $("#button-vive-sign-up").addClass ("out-queue");
     $("#button-vive-sign-up").removeClass ("button-red");
     $("#button-vive-sign-up").addClass ("button-blue");
+
+    // Toggle Vive sidebar button
+    $("#button-vive").text ("Sign Up For The Vive");
 
     // Toggle function
     $("#button-vive-sign-up").off ();
