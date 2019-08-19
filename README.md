@@ -2,8 +2,8 @@
 
 A local game-hosting service for the University of Warwick Computing Society.
 
-Websites: uwcs.co.uk, warwick.gg
-Email: techteam@uwcs.co.uk
+Websites: uwcs.co.uk, warwick.gg  
+Email: techteam@uwcs.co.uk  
 Discord: discord.gg/uwcs (report bugs to @distributive law#5486)
 
 ## Files
