@@ -29,9 +29,8 @@ function simulateInstallation (button)
       // Set the button to play
       button.prop ("disabled", false);
       button.addClass ("installed")
-      button.css ("background-image", "var(--button_blue)");
       button.append ('<img src="static/img/play.png" class="play-symbol" draggable=false />');
-      button.css ("background-color", "var(--button_blue)");
+      button.removeAttr ("style");
       clearInterval (interval);
     }
     i++;
