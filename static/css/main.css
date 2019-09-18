@@ -27,8 +27,11 @@
 
   --ticket_title: white;
   --ticket_body: #BEC0C1;
-  --ticket_bg: #252b2f;
+  --ticket_bg: #252B2F;
   --ticket_button_width: 4.9em;
+
+  --ticket_tag: #383A46;
+  --ticket_tag_hover: #1D1F2B;
 
   --sidebar_width: 24em;
 
@@ -107,6 +110,7 @@ button:active {
 }
 .button-blue:hover {
   background-color: var(--button_blue_hover);
+  cursor: pointer;
 }
 .button-blue:active {
   background-color: var(--button_blue_active);
@@ -118,8 +122,9 @@ button:active {
 }
 .button-yellow:hover {
   background-color: var(--button_yellow_hover);
+  cursor: pointer;
 }
-.button-yellow:hover {
+.button-yellow:active {
   background-color: var(--button_yellow_active);
 }
 
@@ -129,8 +134,9 @@ button:active {
 }
 .button-grey:hover {
   background-color: var(--button_grey_hover);
+  cursor: pointer;
 }
-.button-grey:hover {
+.button-grey:active {
   background-color: var(--button_grey_active);
 }
 
@@ -140,6 +146,7 @@ button:active {
 }
 .button-red:hover {
   background-color: var(--button_red_hover);
+  cursor: pointer;
 }
 .button-red:hover {
   background-color: var(--button_red_active);
@@ -170,6 +177,7 @@ button:active {
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--warwickgg_black);
+  cursor: pointer;
 }
 
 #vive-queue::-webkit-scrollbar-thumb {
@@ -301,6 +309,8 @@ button:active {
   width: 13em;
   display: block;
   border-radius: 10px;
+
+  flex-shrink: 0;
 }
 
 .game-ticket-content h3 {
@@ -356,7 +366,11 @@ button:active {
   text-align: center;
 
   color: var(--ticket_body);
-  background-color: var(--warwickgg_light_blue_shadow);
+  background-color: var(--ticket_tag);
+}
+.game-ticket-tag:hover {
+  background-color: var(--ticket_tag_hover);
+  cursor: pointer;
 }
 
 .game-ticket-button-container {
