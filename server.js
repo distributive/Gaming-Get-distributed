@@ -9,9 +9,9 @@ let port = 42069;
 let server = http.createServer (function (request, response) {
 
   let path = url.parse (request.url).pathname;
-	let topPath = /^\/?([^\/]*)\/?([^\/]*)/.exec (path);
-	let tailPath = topPath ? topPath[2] : '';
-	topPath = topPath ? topPath[1] : '';
+  let topPath = /^\/?([^\/]*)\/?([^\/]*)/.exec (path);
+  let tailPath = topPath ? topPath[2] : "";
+  topPath = topPath ? topPath[1] : "";
 
   // Sanitise path
   path = path.substring (1, path.length).replace (/%20/g, "\ ");
@@ -25,29 +25,27 @@ let server = http.createServer (function (request, response) {
 
     case "static":
     case "assets":
-      if (request.url.match ("\.css$"))
-      {
-        var fileStream = fs.createReadStream (path, "UTF-8");
-        response.writeHead (200, {"Content-Type": "text/css"});
-        fileStream.pipe (response);
-      }
-      else if (request.url.match ("\.png$"))
-      {
-        var fileStream = fs.createReadStream (path);
-        response.writeHead (200, {"Content-Type": "image/png"});
-        fileStream.pipe (response);
-      }
-      else if (request.url.match ("\.jpe?g$"))
-      {
-        var fileStream = fs.createReadStream (path);
-        response.writeHead (200, {"Content-Type": "image/jpg"});
-        fileStream.pipe (response);
-      }
-      else
-      {
-        response.write (fs.readFileSync (path, "utf8"));
-        response.end ();
-      }
+      serveRawData (request, response, path);
+    break;
+
+    case "steam":
+      steam ();
+      response.end ();
+    break;
+
+    case "volume":
+      volume ();
+      response.end ();
+    break;
+
+    case "mouse":
+      mouse ();
+      response.end ();
+    break;
+
+    case "resolution":
+      fixResolution ();
+      response.end ();
     break;
   }
 }).listen (port);
@@ -91,4 +89,71 @@ function buildHTML ()
 
   // Paste the list of game divs into the full html template
   return htmlTemplate.replace ("@games", gameHTML)
+}
+
+
+
+function serveRawData (request, response, path)
+{
+  if (request.url.match ("\.css$"))
+  {
+    var fileStream = fs.createReadStream (path, "UTF-8");
+    response.writeHead (200, {"Content-Type": "text/css"});
+    fileStream.pipe (response);
+  }
+  else if (request.url.match ("\.png$"))
+  {
+    var fileStream = fs.createReadStream (path);
+    response.writeHead (200, {"Content-Type": "image/png"});
+    fileStream.pipe (response);
+  }
+  else if (request.url.match ("\.jpe?g$"))
+  {
+    var fileStream = fs.createReadStream (path);
+    response.writeHead (200, {"Content-Type": "image/jpg"});
+    fileStream.pipe (response);
+  }
+  else
+  {
+    response.write (fs.readFileSync (path, "utf8"));
+    response.end ();
+  }
+}
+
+
+
+function steam ()
+{
+  console.log ("Launching Steam");
+  childProcess.exec ("/dcs/guest/compsoc/steam/steam&", function (err, stdout, stderr) {
+    if (err)
+      console.log (err);
+  });
+}
+
+function volume ()
+{
+  console.log ("Launching gnome-control-center sound");
+	childProcess.exec ("gnome-control-center sound", function (err, stdout, stderr) {
+    if (err)
+      console.log (err);
+  });
+}
+
+function mouse ()
+{
+  console.log("Launching gnome-control-center mouse");
+	childProcess.exec ("gnome-control-center mouse", function (err, stdout, stderr) {
+    if (err)
+      console.log (err);
+  });
+}
+
+function fixResolution ()
+{
+  console.log ("Fixing resolution");
+  childProcess.exec ("xrandr -s 0", function (err, stdout, stderr) {
+    if (err)
+      console.log (err);
+  });
 }

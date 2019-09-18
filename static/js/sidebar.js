@@ -14,7 +14,7 @@ $(document).ready (function () {
 
   /* Button events */
   $("#button-steam").click (function () {
-    alert ("Steam");
+    $.post ("steam", {});
   });
 
   $("#button-chrome").click (function () {
@@ -22,15 +22,15 @@ $(document).ready (function () {
   });
 
   $("#button-volume").click (function () {
-    alert ("Volume");
-  });
+    $.post ("volume", {});
+ });
 
   $("#button-mouse").click (function () {
-    alert ("Mouse");
+    $.post ("mouse", {});
   });
 
   $("#button-resolution").click (function () {
-    alert ("Resolution");
+    $.post ("resolution", {});
   });
 
   $("#button-food").click (function () {
