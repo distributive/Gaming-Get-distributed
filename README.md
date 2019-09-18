@@ -8,7 +8,7 @@ Discord: discord.gg/uwcs (report bugs to @distributive law#5486)
 
 ## Files
 
-**main.py**: Compiles and opens the landing page locally.
+**server.js**: Creates a local server running the service (useage: node server.js).
 
 ## Todo list
 
