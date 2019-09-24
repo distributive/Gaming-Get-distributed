@@ -49,6 +49,7 @@ let server = http.createServer (function (request, response) {
     break;
   }
 }).listen (port);
+console.log(`listening on ${port}`);
 
 
 
