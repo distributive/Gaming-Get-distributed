@@ -1,12 +1,22 @@
 let http = require ("http");
 let url = require ("url");
 let fs = require ("fs");
+let path = require("path");
 // let express = require ("express");
 let childProcess = require ("child_process");
 
 const dcsGetBinary = "dcs-get";
 
 let port = 42069;
+
+// sqlite3 for the vive list
+let sqlite3 = require("sqlite3").verbose();
+const db_file = path.resolve(__dirname, '.vive.db');
+let db = new sqlite3.Database(db_file);
+
+db.serialize(function() {
+  db.run("CREATE TABLE signups (id INTEGER PRIMARY KEY, name TEXT NOT NULL)");
+});
 
 let server = http.createServer (function (request, response) {
 
@@ -54,7 +64,6 @@ let server = http.createServer (function (request, response) {
 console.log(`listening on ${port}`);
 
 
-
 function buildHTML ()
 {
   // Load html templates
@@ -92,7 +101,6 @@ function buildHTML ()
 }
 
 
-
 function serveRawData (request, response, path)
 {
   if (request.url.match ("\.css$"))
@@ -121,7 +129,6 @@ function serveRawData (request, response, path)
 }
 
 
-
 function steam ()
 {
   console.log ("Launching Steam");
@@ -130,6 +137,7 @@ function steam ()
       console.log (err);
   });
 }
+
 
 function volume ()
 {
@@ -140,6 +148,7 @@ function volume ()
   });
 }
 
+
 function mouse ()
 {
   console.log("Launching gnome-control-center mouse");
@@ -148,6 +157,7 @@ function mouse ()
       console.log (err);
   });
 }
+
 
 function fixResolution ()
 {
