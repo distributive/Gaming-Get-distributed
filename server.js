@@ -15,7 +15,7 @@ const db_file = path.resolve(__dirname, '.vive.db');
 let db = new sqlite3.Database(db_file);
 
 db.serialize(function() {
-  db.run("CREATE TABLE signups (id INTEGER PRIMARY KEY, name TEXT NOT NULL)");
+  db.run("CREATE TABLE IF NOT EXISTS signups (id INTEGER PRIMARY KEY, name TEXT NOT NULL)");
 });
 
 let server = http.createServer (function (request, response) {
