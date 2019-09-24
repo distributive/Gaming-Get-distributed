@@ -4,6 +4,8 @@ let fs = require ("fs");
 // let express = require ("express");
 let childProcess = require ("child_process");
 
+const dcsGetBinary = "dcs-get";
+
 let port = 42069;
 
 let server = http.createServer (function (request, response) {
@@ -61,32 +63,29 @@ function buildHTML ()
   let tagTemplate  = fs.readFileSync ("templates/tag.tmpl", "utf8");
 
   // Load list of game directories
-  let gameDirectories = fs.readdirSync ("assets/games", "utf8");
-
-  // Load game data
-  let games = [];
-  gameDirectories.forEach (function (directory) {
-    let gameData = fs.readFileSync ("assets/games/" + directory + "/data.json", "utf8");
-    games.push ([directory, JSON.parse (gameData)]);
-  });
-
-  // Sort games
-  games.sort (game => game[1]["name"]);
+  //let gameDirectories = fs.readdirSync ("assets/games", "utf8");
+  const packageList = JSON.parse(fs.readFileSync("/var/tmp/dcs-get/packages.json", "utf8"));
+  const games = {};
+  for(const package of Object.keys(packageList).sort()) {
+    if(packageList[package].type === "game")
+      games[package] = packageList[package];
+  }
 
   // Stitch together the html source
   let gameHTML = "";
-  games.forEach (function (game) {
+  for(const gameName of Object.keys(games)) {
+    const game = games[gameName];
     let tags = "";
-    game[1]["tags"].forEach (function (tag) {
+    game.tags.forEach (function (tag) {
       tags += tagTemplate.replace (/@tag/g, tag);
     });
 
-    let gameString = gameTemplate.replace (/@file/g, game[0]);
-    gameString = gameString.replace (/@name/g, game[1]["name"]);
-    gameString = gameString.replace (/@description/g, game[1]["description"]);
+    let gameString = gameTemplate.replace (/@img/g, game["image-url"]);
+    gameString = gameString.replace (/@name/g, gameName);
+    gameString = gameString.replace (/@description/g, game.description);
     gameString = gameString.replace (/@tags/g, tags)
     gameHTML += gameString
-  });
+  }
 
   // Paste the list of game divs into the full html template
   return htmlTemplate.replace ("@games", gameHTML)
