@@ -20,19 +20,36 @@ function simulateInstallation (button)
   button.css ("background-color", "var(--warwickgg_dark_grey)");
   button.text ("");
 
+  console.log(button);
+  const game = button[0].value;
+  $.ajax({
+    url: `install/${game}`,
+    dataType: "text"
+  })
+  .done(data => {
+    console.log(`started installing: ${game}`);
+    updateProgress();
+  });
+
   // Animate the loading bar
-  var i = 0;
-  var interval = setInterval (function () {
-    button.css ("background-image", "linear-gradient(to right, var(--button_blue), var(--button_blue) " + i + "%, transparent " + i + "%, transparent), url('static/img/hash.png')");
-    if (i >= 100)
-    {
-      // Set the button to play
-      button.prop ("disabled", false);
-      button.addClass ("installed")
-      button.append ('<img src="static/img/play.png" class="play-symbol" draggable=false />');
-      button.removeAttr ("style");
-      clearInterval (interval);
-    }
-    i++;
-  }, 10);
+  function updateProgress() {
+    $.ajax({
+      url: `status/${game}`,
+      dataType: "json"
+    })
+    .done(data => {
+      if(data.progress === 1) {
+          // Set the button to play
+          button.prop ("disabled", false);
+          button.addClass ("installed")
+          button.append ('<img src="static/img/play.png" class="play-symbol" draggable=false />');
+          button.removeAttr ("style");
+      }
+      else {
+        const percentage = data.progress * 100;
+        button.css ("background-image", "linear-gradient(to right, var(--button_blue), var(--button_blue) " + percentage + "%, transparent " + percentage + "%, transparent), url('static/img/hash.png')");
+        updateProgress();
+      }
+    })
+  }
 }

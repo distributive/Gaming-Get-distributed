@@ -5,14 +5,14 @@ let path = require("path");
 // let express = require ("express");
 let childProcess = require ("child_process");
 
-const dcsGetBinary = "dcs-get";
-
 let port = 42069;
 
 // sqlite3 for the vive list
 let sqlite3 = require("sqlite3").verbose();
 const db_file = path.resolve(__dirname, '.vive.db');
 let db = new sqlite3.Database(db_file);
+
+const installations = [];
 
 db.serialize(function() {
   db.run("CREATE TABLE IF NOT EXISTS signups (id INTEGER PRIMARY KEY, name TEXT NOT NULL)");
@@ -59,6 +59,14 @@ let server = http.createServer (function (request, response) {
       fixResolution ();
       response.end ();
     break;
+
+    case "install":
+      installGame(request, response, path);
+    break;
+
+    case "status":
+      status(request, response, path);
+    break;
   }
 }).listen (port);
 console.log(`listening on ${port}`);
@@ -71,7 +79,6 @@ function buildHTML ()
   let tagTemplate  = fs.readFileSync ("templates/tag.tmpl", "utf8");
 
   // Load list of game directories
-  //let gameDirectories = fs.readdirSync ("assets/games", "utf8");
   const packageList = JSON.parse(fs.readFileSync("/var/tmp/dcs-get/packages.json", "utf8"));
   const games = {};
   for(const package of Object.keys(packageList).sort()) {
@@ -165,4 +172,37 @@ function fixResolution ()
     if (err)
       console.log (err);
   });
+}
+
+function status(request, response, path) {
+  const game = path.match(/\/([^\/]*)$/)[1];
+  const gameInfo = installations[game] || {progress: 0};
+
+  response.setHeader('Content-type', 'application/json');
+  response.write(JSON.stringify(gameInfo));
+  response.end();
+}
+
+function installGame(request, response, path) {
+  const game = path.match(/\/([^\/]*)$/)[1];
+  installations[game] = {
+    progress: 0
+  };
+  const process = childProcess.spawn("dcs-get", ["install", game]);
+  process.stdout.on('data', data => {
+    const progress = data.toString().match(/(\d+)\/(\d+)/)
+    if(progress !== null)
+      installations[game].progress = progress[1]/progress[2];
+  });
+  process.stderr.on('data', data => {
+    console.log('stderr', data.toString());
+  });
+  process.on('close', code => {
+    console.log(`Installing ${game} finished with code ${code}`);
+    if(code === 0)
+      installations[game].progress = 1;
+  });
+
+  response.setHeader('Content-type', 'application/json');
+  response.end();
 }
