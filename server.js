@@ -67,6 +67,10 @@ let server = http.createServer (function (request, response) {
     case "status":
       status(request, response, path);
     break;
+
+    case "launch":
+      launchGame(request,response,path);
+    break;
   }
 }).listen (port);
 console.log(`listening on ${port}`);
@@ -204,5 +208,20 @@ function installGame(request, response, path) {
   });
 
   response.setHeader('Content-type', 'application/json');
+  response.end();
+}
+
+function launchGame(request,response,path) {
+  const game = path.match(/\/([^\/]*)$/)[1];
+  if(!game)
+  {
+    console.err("gameName not found");
+  }
+  const process = childProcess.spawn(game);
+  process.on('close', code => {
+    console.log(`Game: ${game} finished with code ${code}`);
+  });
+  response.setHeader('Content-type','text');
+  response.write(`Launching ${game}`);
   response.end();
 }
