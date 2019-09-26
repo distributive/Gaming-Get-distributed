@@ -151,14 +151,6 @@ button:active {
 .button-red:hover {
   background-color: var(--button_red_active);
 }
-
-.disable-select {
-    user-select: none; /* supported by Chrome and Opera */
-   -webkit-user-select: none; /* Safari */
-   -khtml-user-select: none; /* Konqueror HTML */
-   -moz-user-select: none; /* Firefox */
-   -ms-user-select: none; /* Internet Explorer/Edge */
-}
 /* General END */
 
 
@@ -193,14 +185,8 @@ button:active {
 
 /* Sidebar */
 .sidebar {
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
-  height: 100%;
+  height: 100vh;
   width: var(--sidebar_width);
-  float: left;
 
   background-color: var(--warwickgg_black);
 
@@ -270,16 +256,13 @@ button:active {
 
 
 /* Game tickets */
+main {
+  display: flex;
+}
+
 .games {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  margin: 0 0 0 var(--sidebar_width);
-  padding: 2em 0 0 0;
-
+  flex-grow: 1;
+  height: 100vh;
   overflow-y: scroll;
 }
 
