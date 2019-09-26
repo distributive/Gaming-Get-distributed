@@ -270,7 +270,7 @@ main {
   width: 53em;
   margin: 0 auto 1em auto;
   padding: 1em;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: var(--ticket_bg);
 
   overflow-y: hidden;
@@ -279,15 +279,16 @@ main {
 
   transition: border-radius 0.2s;
 }
-.game-ticket:hover {
-  border-radius: 1px;
+
+.game-ticket:first-child {
+  margin-top: 1em;
 }
 
 .game-icon {
   height: 13em;
   width: 13em;
   display: block;
-  border-radius: 10px;
+  border-radius: 6px;
 
   flex-shrink: 0;
 }
@@ -306,8 +307,9 @@ main {
 .game-ticket-content {
   display: flex;
   position: relative;
-  margin: 0 0 0 1em;
-  padding: 0 0 0 1em;
+  margin-left: 2em;
+
+  width: 100%;
 
   flex-direction: column;
 
