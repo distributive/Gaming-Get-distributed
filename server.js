@@ -70,9 +70,9 @@ console.log(`listening on ${port}`);
 
 function buildHTML() {
     // Load html templates
-    let htmlTemplate = fs.readFileSync("templates/index.tmpl", "utf8");
-    let gameTemplate = fs.readFileSync("templates/game.tmpl", "utf8");
-    let tagTemplate = fs.readFileSync("templates/tag.tmpl", "utf8");
+    let htmlTemplate = fs.readFileSync(`${__dirname}/templates/index.tmpl`, "utf8");
+    let gameTemplate = fs.readFileSync(`${__dirname}/templates/game.tmpl`, "utf8");
+    let tagTemplate = fs.readFileSync(`${__dirname}/templates/tag.tmpl`, "utf8");
 
     // Load list of game directories
     const packageList = JSON.parse(fs.readFileSync("/var/tmp/dcs-get/packages.json", "utf8"));
@@ -93,9 +93,10 @@ function buildHTML() {
 
         let gameTitle = game["title"] || gameName;
         let gameString = gameTemplate.replace(/@img/g, game["image-url"]);
-        gameString = gameString.replace(/@name/g, gameTitle);
+        gameString = gameString.replace(/@title/g, gameTitle);
         gameString = gameString.replace(/@description/g, game.description);
-        gameString = gameString.replace(/@tags/g, tags)
+        gameString = gameString.replace(/@tags/g, tags);
+        gameString = gameString.replace(/@name/g, gameName);
         gameHTML += gameString
     }
 
