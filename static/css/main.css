@@ -92,7 +92,7 @@ p {
   line-height: 1.4;
 }
 
-button {
+button, .button {
   border-radius: 3px;
   border: none;
 
@@ -100,7 +100,29 @@ button {
   font-size: 14px;
   font-weight: bold;
 }
-button:active {
+
+.dev-credit.dev-credit.dev-credit {
+  margin-top: 20em;
+}
+
+.dev-credit p {
+  font-size: 13px;
+  font-family: "Ubuntu Mono", Consolas, "Liberation Mono", Courier, monospace;
+
+  color: var(--ticket_body);
+}
+
+.dev-credit p a {
+  color: white;
+}
+
+.button {
+  text-align: center;
+  line-height: 3em;
+  text-decoration: none;
+}
+
+button:active, .button:active {
   transform: translateY(1px);
 }
 
@@ -223,14 +245,16 @@ button:active {
   margin-bottom: 0.5em;
 }
 
-.sidebar-block button {
+.sidebar-block button,
+.sidebar-block .button {
   position: relative;
   height: 3em;
   width: 100%;
   margin-bottom: 1em;
 }
 
-.sidebar-block button .fab {
+.sidebar-block button .fab,
+.sidebar-block .button .fab {
   margin-left: 0.5em;
   opacity: 0.70;
 }
@@ -393,6 +417,8 @@ main {
 .pop-up-background {
   position: absolute;
   display: none;
+  top: 0;
+  left: 0;
   z-index: 100;
 
   width: 100%;

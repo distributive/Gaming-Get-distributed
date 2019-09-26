@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <!--
-	Gaming Get - distributed
+	Gaming Get
 
 	IF YOU ARE AT FRIDAY NIGHT GAMING, QUIT MESSING WITH THE MACHINE AND PLAY SOME GAMES
 
@@ -9,7 +9,7 @@
 -->
 <html>
 	<head>
-	<title>Gaming Get - distributed</title>
+	<title>Gaming Get</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="static/css/main.css" />
@@ -43,18 +43,15 @@
 		<main>
 			<div class="sidebar">
 				<div class="title centred">
-					<!--<h1 class="title">Gaming Get</h1>
-					<h2 class="subtitle">distributed</h2>-->
 					<img src="static/img/logo.png" draggable="false" />
 				</div>
 
 				<div class="search-bar-container sidebar-block">
-					<!--<h4 class="centred">Search</h4>-->
-  				<input type="text" placeholder="Search..." class="search-bar centred" id="search-bar">
+					<input type="text" placeholder="Search..." class="search-bar centred" id="search-bar">
 				</div>
 
 				<div class="utilities sidebar-block">
-					<h4 class="centred">Utilities</h4>
+					<h4>Utilities</h4>
 					<button type="button" class="centred button-blue" id="button-steam">Steam<i class="fab fa-steam"></i></button>
 					<button type="button" class="centred button-blue" id="button-chrome">New Chrome window<i class="fab fa-chrome"></i></button>
 					<button type="button" class="centred button-grey" id="button-volume">Volume settings</button>
@@ -63,16 +60,23 @@
 				</div>
 
 				<div class="links sidebar-block">
-					<h4 class="centred">Links</h4>
+					<h4>Links</h4>
 					<button type="button" class="centred button-grey" id="button-food">Food orders</button>
+					<a class="button centred button-grey" id="button-discord" href="https://discord.gg/uwcs" target="_blank">Discord</a>
 				</div>
 
 				<div class="shortcuts sidebar-block">
-					<h4 class="centred">Shortcuts</h4>
+					<h4>Shortcuts</h4>
 					<p>
 						Click tags to filter games. <br>
 						Hold ctrl to add new tags to the search list. <br>
 						Hold shift to clear the search list.
+					</p>
+				</div>
+
+				<div class="dev-credit sidebar-block">
+					<p class="text-centred">
+						Originally developed by <a href="https://github.com/distributive">distributive law</a> and maintained by members of the <a href="https://github.com/UWCS/Gaming-get-distributed/graphs/contributors">Uni of Warwick Computing Society</a>.
 					</p>
 				</div>
 			</div>
@@ -82,15 +86,15 @@
 			</div>
     </main>
 
-		<div class="pop-up-background close-pop-up disable-select">
-			<div class="pop-up-window" id="food-redirect">
-				<h4>Join our Discord</h4>
-				<div class="pop-up-window-content">
-					<img src="https://cdn.discordapp.com/icons/189453139584221185/a_d8c9f421b8c23b26788904063b79fe25.gif?size=256" draggable="false" />
-					<p>Our Discord server has a channel for organising food orders with others at events. Just look for #food-orders under the Gaming category in the channel list and ask away!</p>
-				</div>
-				<button type="button" class="centred button-blue" id="button-discord">Join</button>
+	<div class="pop-up-background close-pop-up disable-select">
+		<div class="pop-up-window" id="food-redirect">
+			<h4>Join our Discord</h4>
+			<div class="pop-up-window-content">
+				<img src="https://cdn.discordapp.com/icons/189453139584221185/a_d8c9f421b8c23b26788904063b79fe25.gif?size=256" draggable="false" />
+				<p>Our Discord server has a channel for organising food orders with others at events. Just look for #food-orders under the Gaming category in the channel list and ask away!</p>
 			</div>
+			<a class="button centred button-blue" id="button-discord" href="https://discord.gg/uwcs" target="_blank">Join</a>
 		</div>
+	</div>
   </body>
 </html>
