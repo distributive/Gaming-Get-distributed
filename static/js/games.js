@@ -1,11 +1,30 @@
 $(document).ready (function () {
-
-  $(".game-button.uninstalled").click (function () {
-      requestInstallation ($(this));
-  });
+  $(".game-button.uninstalled").each(function() { checkIfInstalled($(this)); });
+  $(".game-button.uninstalled").click (function() {requestInstallation ($(this)); });
 });
 
 
+function checkIfInstalled(button)
+{
+  const game = button[0].value;
+  $.ajax({
+    url:`check/${game}`,
+    dataType: "text"
+  }).done(raw => {
+    var data = JSON.parse(raw);
+    if(data.found) {
+      button.text("");
+      button.prop ("disabled", false);
+      button.addClass ("installed");
+      button.removeClass("uninstalled");
+      button.append ('<img src="static/img/play.png" class="play-symbol" draggable=false />');
+      button.removeAttr ("style");
+      $(".game-button.installed").click (function () {
+          requestLaunch($(this));
+      });
+    }
+  });
+}
 
 /*
 WAS TEMP, now made whole

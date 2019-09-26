@@ -61,6 +61,10 @@ let server = http.createServer (function (request, response) {
     case "launch":
       launchGame(request,response,path);
     break;
+
+    case "check":
+      checkGameInstall(request,response,path);
+    break;
   }
 }).listen (port);
 console.log(`listening on ${port}`);
@@ -213,5 +217,14 @@ function launchGame(request,response,path) {
   });
   response.setHeader('Content-type','text');
   response.write(`Launching ${game}`);
+  response.end();
+}
+
+function checkGameInstall(request,response,path) {
+  const game = path.match(/\/([^\/]*)$/)[1];
+  const symLinkLoc = "/var/tmp/dcs-get/bin/"+game;
+  var check = fs.existsSync(symLinkLoc);
+  response.setHeader('Content-type','application/json');
+  response.write(JSON.stringify({found:check}));
   response.end();
 }
