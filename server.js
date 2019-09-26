@@ -1,22 +1,12 @@
 let http = require ("http");
 let url = require ("url");
 let fs = require ("fs");
-let path = require("path");
 // let express = require ("express");
 let childProcess = require ("child_process");
 
 let port = 42069;
 
-// sqlite3 for the vive list
-let sqlite3 = require("sqlite3").verbose();
-const db_file = path.resolve(__dirname, '.vive.db');
-let db = new sqlite3.Database(db_file);
-
 const installations = [];
-
-db.serialize(function() {
-  db.run("CREATE TABLE IF NOT EXISTS signups (id INTEGER PRIMARY KEY, name TEXT NOT NULL)");
-});
 
 let server = http.createServer (function (request, response) {
 
