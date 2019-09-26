@@ -203,7 +203,10 @@ button:active {
   float: left;
 
   background-color: var(--warwickgg_black);
-  /*border-right: solid 2px var(--warwickgg_black);*/
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
@@ -221,9 +224,7 @@ button:active {
 
 .sidebar-block {
   width: 80%;
-  margin-top: 3em;
-  margin-right: auto;
-  margin-left: auto;
+  margin-top: 2em;
 }
 
 .sidebar-block h4 {
@@ -239,7 +240,7 @@ button:active {
 .sidebar-block button {
   position: relative;
   height: 3em;
-  width: 19em;
+  width: 100%;
   margin-bottom: 1em;
 }
 
@@ -249,25 +250,20 @@ button:active {
 }
 
 .utilities {
-  margin-top: 8em;
+  margin-top: 2em;
 }
 
 .search-bar {
-  width: 50%;
+  width: 90%;
   border: none;
   border-radius: 6px;
-  padding: 0.6em 0.5em;
+  padding: 0.8em 0.5em;
 
   color: white;
   background-color: var(--warwickgg_dark_grey);
-
-  transition: width 0.5s;
 }
 ::-webkit-input-placeholder {  /* Chrome/Opera/Safari */
   color: white;
-}
-.search-bar:focus {
-  width: 80%;
 }
 /* Sidebar END */
 
