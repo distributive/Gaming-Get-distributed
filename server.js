@@ -106,6 +106,7 @@ function buildHTML() {
 
 
 function serveRawData(request, response, path) {
+    path = `${__dirname}/` + path
     if (request.url.match("\.css$")) {
         var fileStream = fs.createReadStream(path, "UTF-8");
         response.writeHead(200, {
