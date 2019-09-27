@@ -17,10 +17,6 @@ $(document).ready(function() {
         $.post("steam", {});
     });
 
-    $("#button-chrome").click(function() {
-        window.open("https://google.com", "window name", "window settings");
-    });
-
     $("#button-volume").click(function() {
         $.post("volume", {});
     });
