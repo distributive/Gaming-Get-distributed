@@ -2,11 +2,11 @@ $(document).ready(function() {
     $(".game-button.uninstalled").each(function() {
         checkIfInstalled($(this));
     });
-    $(".game-button.uninstalled").click(function() {
+    $(".game-button.uninstalled").click(function(event) {
+        event.preventDefault();
         requestInstallation($(this));
     });
 });
-
 
 function checkIfInstalled(button) {
     const game = button[0].value;
@@ -22,16 +22,14 @@ function checkIfInstalled(button) {
             button.removeClass("uninstalled");
             button.append('<img src="static/img/play.png" class="play-symbol" draggable=false />');
             button.removeAttr("style");
-            $(".game-button.installed").click(function() {
+            button.unbind('click').click(function(event) {
+                event.preventDefault();
                 requestLaunch($(this));
             });
         }
     });
 }
 
-/*
-WAS TEMP, now made whole
-*/
 function requestInstallation(button) {
     // Set button to loading
     button.off();
@@ -41,15 +39,13 @@ function requestInstallation(button) {
     button.css("background-position", "right");
     button.css("background-color", "var(--warwickgg_dark_grey)");
     button.text("");
-
-    console.log(button);
+    
     const game = button[0].value;
     $.ajax({
             url: `install/${game}`,
             dataType: "text"
         })
         .done(data => {
-            console.log(`started installing: ${game}`);
             updateProgress();
         });
 
@@ -67,7 +63,8 @@ function requestInstallation(button) {
                     button.removeClass("uninstalled");
                     button.append('<img src="static/img/play.png" class="play-symbol" draggable=false />');
                     button.removeAttr("style");
-                    $(".game-button.installed").click(function() {
+                    button.unbind('click').click(function(event){
+                        event.preventDefault();
                         requestLaunch($(this));
                     });
                 } else {
@@ -82,13 +79,12 @@ function requestInstallation(button) {
 }
 
 function requestLaunch(button) {
-    console.log(button);
     const game = button[0].value;
     $.ajax({
             url: `launch/${game}`,
             dataType: "text"
         })
-        .done(data => {
+        .done(_ => {
             console.log(`attempting to launch: ${game}`);
         });
 }
