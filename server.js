@@ -134,9 +134,12 @@ function serveRawData(request, response, path) {
 
 function steam() {
     console.log("Launching Steam");
-    childProcess.exec("/dcs/guest/compsoc/steam/steam&", function(err, stdout, stderr) {
+    const process = childProcess.exec("HOME=/var/tmp/steam-tmp /var/tmp/steam-tmp/steam/steam &", function(err, stdout, stderr) {
         if (err)
             console.log(err);
+    });
+    process.on('close', code => {
+      console.log("Steam closed with code: " + code);
     });
 }
 
