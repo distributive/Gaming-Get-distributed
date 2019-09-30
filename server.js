@@ -5,7 +5,7 @@ let fs = require("fs");
 let childProcess = require("child_process");
 
 let port = 42069;
-
+const saveDir = "/var/tmp/dcs-get/saves";
 const installations = [];
 
 let server = http.createServer(function(request, response) {
@@ -210,8 +210,15 @@ function launchGame(request, response, path) {
     if (!game) {
         console.err("gameName not found");
     }
-    const process = childProcess.spawn(game);
-    process.on('close', code => {
+    let enviro = process.env; //Calling variables in this function 'process' will result in breaking the GLOBAL variable process
+    enviro.HOME = saveDir; //Set home directory for games, such that they save there
+    const proc = childProcess.spawn(game,[],{env:enviro});
+
+    proc.on('error', code => {
+      console.log(`Game: ${game} exited with error: ${code}`);
+    });
+
+    proc.on('close', code => {
         console.log(`Game: ${game} finished with code ${code}`);
     });
     response.setHeader('Content-type', 'text');
