@@ -77,14 +77,29 @@ function buildHTML() {
     // Load list of game directories
     const packageList = JSON.parse(fs.readFileSync("/var/tmp/dcs-get/packages.json", "utf8"));
     const games = {};
-    for (const package of Object.keys(packageList).sort()) {
+    for (const package of Object.keys(packageList)) {
         if (packageList[package].type === "game")
             games[package] = packageList[package];
     }
 
     // Stitch together the html source
     let gameHTML = "";
-    for (const gameName of Object.keys(games)) {
+    for (const gameName of Object.keys(games).sort((a,b) => {
+      var compA = a.toLowerCase();
+      var compB = b.toLowerCase();
+
+      if(compA < compB)
+      {
+        return -1;
+      }
+
+      if(compA > compB)
+      {
+        return 1;
+      }
+
+      return 0;
+    })) {
         const game = games[gameName];
         let tags = "";
         game.tags.forEach(function(tag) {
@@ -203,6 +218,10 @@ function installGame(request, response, path) {
 
     response.setHeader('Content-type', 'application/json');
     response.end();
+}
+
+function getLaunchStatus(request,response,path) {
+
 }
 
 function launchGame(request, response, path) {
