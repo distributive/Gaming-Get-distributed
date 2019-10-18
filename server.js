@@ -1,17 +1,20 @@
 let http = require("http");
 let url = require("url");
 let fs = require("fs");
-// let express = require ("express");
+// const express = require ("express");
+// const jsonfile = require("jsonfile");
 let childProcess = require("child_process");
 
 let port = 42069;
 const saveDir = "/var/tmp/dcs-get/saves";
 const installations = [];
 
-let server = http.createServer(function(request, response) {
+
+const server = http.createServer(function(request, response) {
 
     let path = url.parse(request.url).pathname;
-    let topPath = /^\/?([^\/]*)\/?([^\/]*)/.exec(path);
+    let topPath = /^\/?([^\/]*)\/?([^\/]*)/.exec(path); //Begone regex
+    //Regex is painful, lets do something smarter
     let tailPath = topPath ? topPath[2] : "";
     topPath = topPath ? topPath[1] : "";
 
@@ -66,15 +69,28 @@ let server = http.createServer(function(request, response) {
             break;
     }
 }).listen(port);
-console.log(`listening on ${port}`);
+console.log(`listening on ${port} \n may god have mercy on our souls`);
 
 function buildHTML() {
     // Load html templates
+    //Nicely instead of hard coded?
     let htmlTemplate = fs.readFileSync(`${__dirname}/templates/index.tmpl`, "utf8");
     let gameTemplate = fs.readFileSync(`${__dirname}/templates/game.tmpl`, "utf8");
     let tagTemplate = fs.readFileSync(`${__dirname}/templates/tag.tmpl`, "utf8");
 
     // Load list of game directories
+    //Replace with the use of JSONfile
+    /*
+    let packagesPath = "/var/tmp/dcs-get/packages.json";
+    let packageList = "";
+    if(fs.exists(packagesPath))
+    {
+      packageList = jsonfile.read(packagesPath);
+    } else
+    {
+      console.log("dcs-get broken, sad times");
+    }
+     */
     const packageList = JSON.parse(fs.readFileSync("/var/tmp/dcs-get/packages.json", "utf8"));
     const games = {};
     for (const package of Object.keys(packageList)) {
