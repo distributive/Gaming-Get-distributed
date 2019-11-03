@@ -1,5 +1,3 @@
-const http = require("http");
-const url = require("url");
 const fs = require("fs");
 const express = require ("express");
 const jsonfile = require("jsonfile");
@@ -17,6 +15,9 @@ app.use(cors());
 app.use(express.static('static'));
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
+
+app.enable('trust proxy');
+app.set('trust proxy','loopback');
 
 const server = app.listen(port, function() {
   var host = server.address().address;
@@ -49,21 +50,21 @@ app.get('/resolution', function(req,res) {
   res.status(200).end();
 });
 
-app.get('install', function(req,res) {
-  let game = req.path;
+app.get('/install', function(req,res) {
+  let game = req.query.game;
   console.log(`install request for: ${game}`);
   installGame(game);
   res.status(200).end();
 });
 
 app.get('/status', function(req,res) {
-  let game = req.path;
+  let game = req.query.game;
   let gameInfo = status(game);
   res.status(200).send(gameInfo);
 });
 
 app.get('/launch', function(req,res) {
-  let game = req.path;
+  let game = req.query.game;
   let success = launchGame(path);
   if(success)
   {
@@ -74,7 +75,7 @@ app.get('/launch', function(req,res) {
 });
 
 app.get('/check', function(req,res) {
-  let game = req.path;
+  let game = req.query.game;
   let check = checkGameInstall(game);
   res.status(200).send({found:check});
 });
