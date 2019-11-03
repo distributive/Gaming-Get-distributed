@@ -20,7 +20,7 @@ function checkIfInstalled(button) {
             button.prop("disabled", false);
             button.addClass("installed");
             button.removeClass("uninstalled");
-            button.append('<img src="static/img/play.png" class="play-symbol" draggable=false />');
+            button.append('<img src="img/play.png" class="play-symbol" draggable=false />');
             button.removeAttr("style");
             button.unbind('click').click(function(event) {
                 event.preventDefault();
@@ -61,7 +61,7 @@ function requestInstallation(button) {
                     button.prop("disabled", false);
                     button.addClass("installed");
                     button.removeClass("uninstalled");
-                    button.append('<img src="static/img/play.png" class="play-symbol" draggable=false />');
+                    button.append('<img src="img/play.png" class="play-symbol" draggable=false />');
                     button.removeAttr("style");
                     button.unbind('click').click(function(event){
                         event.preventDefault();
@@ -69,7 +69,7 @@ function requestInstallation(button) {
                     });
                 } else {
                     const percentage = data.progress * 100;
-                    button.css("background-image", "linear-gradient(to right, var(--button_blue), var(--button_blue) " + percentage + "%, transparent " + percentage + "%, transparent), url('static/img/hash.png')");
+                    button.css("background-image", "linear-gradient(to right, var(--button_blue), var(--button_blue) " + percentage + "%, transparent " + percentage + "%, transparent), url('img/hash.png')");
                     setTimeout(function() {
                         updateProgress();
                     }, 100);
