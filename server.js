@@ -49,7 +49,7 @@ app.get('/resolution', function(req,res) {
   res.status(200).end();
 });
 
-app.get('/install', function(req,res) {
+app.get('install', function(req,res) {
   let game = req.path;
   console.log(`install request for: ${game}`);
   installGame(game);
