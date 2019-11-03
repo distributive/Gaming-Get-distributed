@@ -1,75 +1,82 @@
-let http = require("http");
-let url = require("url");
-let fs = require("fs");
-// const express = require ("express");
-// const jsonfile = require("jsonfile");
-let childProcess = require("child_process");
+const http = require("http");
+const url = require("url");
+const fs = require("fs");
+const express = require ("express");
+const jsonfile = require("jsonfile");
+const childProcess = require("child_process");
+const cors = require('cors');
 
-let port = 42069;
+const port = 8000;
 const saveDir = "/var/tmp/dcs-get/saves";
+const packagesJsonPath = "/var/tmp/dcs-get/packages.json";
 const installations = [];
 
+const app = express();
 
-const server = http.createServer(function(request, response) {
+app.use(cors());
+app.use(express.static('static'));
+app.use(express.json());       // to support JSON-encoded bodies
+app.use(express.urlencoded({ extended: true })); // to support URL-encoded bodies
 
-    let path = url.parse(request.url).pathname;
-    let topPath = /^\/?([^\/]*)\/?([^\/]*)/.exec(path); //Begone regex
-    //Regex is painful, lets do something smarter
-    let tailPath = topPath ? topPath[2] : "";
-    topPath = topPath ? topPath[1] : "";
+const server = app.listen(port, function() {
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log("Server listening at http://"+host+":"+port);
+});
 
-    // Sanitise path
-    path = path.substring(1, path.length).replace(/%20/g, "\ ");
+app.get('/', function(req,res) {
+  let homePage = buildHTML();
+  res.status(200).send(homePage);
+});
 
-    switch (topPath) {
-        case "":
-            response.write(buildHTML());
-            response.end();
-            break;
+app.get('/steam', function(req,res) {
+  steam();
+  res.status(200).end();
+});
 
-        case "static":
-        case "assets":
-            serveRawData(request, response, path);
-            break;
+app.get('/mouse', function(req,res) {
+  mouse();
+  res.status(200).end();
+});
 
-        case "steam":
-            steam();
-            response.end();
-            break;
+app.get('/volume', function(req,res) {
+  volume();
+  res.status(200).end();
+});
 
-        case "volume":
-            volume();
-            response.end();
-            break;
+app.get('/resolution', function(req,res) {
+  fixResolution();
+  res.status(200).end();
+});
 
-        case "mouse":
-            mouse();
-            response.end();
-            break;
+app.get('/install', function(req,res) {
+  let game = req.path;
+  installGame(game);
+  res.status(200).end();
+});
 
-        case "resolution":
-            fixResolution();
-            response.end();
-            break;
+app.get('/status', function(req,res) {
+  let game = req.path;
+  let gameInfo = status(game);
+  res.status(200).send(gameInfo);
+});
 
-        case "install":
-            installGame(request, response, path);
-            break;
+app.get('/launch', function(req,res) {
+  let game = req.path;
+  let success = launchGame(path);
+  if(success)
+  {
+    res.status(200).send(`Launching ${game}`);
+  } else {
+    res.status(400).end();
+  }
+});
 
-        case "status":
-            status(request, response, path);
-            break;
-
-        case "launch":
-            launchGame(request, response, path);
-            break;
-
-        case "check":
-            checkGameInstall(request, response, path);
-            break;
-    }
-}).listen(port);
-console.log(`listening on ${port} \n may god have mercy on our souls`);
+app.get('/check', function(req,res) {
+  let game = req.path;
+  let check = checkGameInstall(game);
+  res.status(200).send({found:check});
+});
 
 function buildHTML() {
     // Load html templates
@@ -80,18 +87,15 @@ function buildHTML() {
 
     // Load list of game directories
     //Replace with the use of JSONfile
-    /*
-    let packagesPath = "/var/tmp/dcs-get/packages.json";
+    let packagesPath = packagesJsonPath;
     let packageList = "";
-    if(fs.exists(packagesPath))
+    if(fs.existsSync(packagesPath))
     {
-      packageList = jsonfile.read(packagesPath);
+      packageList = jsonfile.readFileSync(packagesPath);
     } else
     {
       console.log("dcs-get broken, sad times");
     }
-     */
-    const packageList = JSON.parse(fs.readFileSync("/var/tmp/dcs-get/packages.json", "utf8"));
     const games = {};
     for (const package of Object.keys(packageList)) {
         if (packageList[package].type === "game")
@@ -135,34 +139,6 @@ function buildHTML() {
     return htmlTemplate.replace("@games", gameHTML)
 }
 
-
-function serveRawData(request, response, path) {
-    path = `${__dirname}/` + path
-    if (request.url.match("\.css$")) {
-        var fileStream = fs.createReadStream(path, "UTF-8");
-        response.writeHead(200, {
-            "Content-Type": "text/css"
-        });
-        fileStream.pipe(response);
-    } else if (request.url.match("\.png$")) {
-        var fileStream = fs.createReadStream(path);
-        response.writeHead(200, {
-            "Content-Type": "image/png"
-        });
-        fileStream.pipe(response);
-    } else if (request.url.match("\.jpe?g$")) {
-        var fileStream = fs.createReadStream(path);
-        response.writeHead(200, {
-            "Content-Type": "image/jpg"
-        });
-        fileStream.pipe(response);
-    } else {
-        response.write(fs.readFileSync(path, "utf8"));
-        response.end();
-    }
-}
-
-
 function steam() {
     console.log("Launching Steam");
     const process = childProcess.exec("HOME=/var/tmp/steam-tmp /var/tmp/steam-tmp/steam/steam &", function(err, stdout, stderr) {
@@ -201,19 +177,15 @@ function fixResolution() {
     });
 }
 
-function status(request, response, path) {
-    const game = path.match(/\/([^\/]*)$/)[1];
+function status(game) {
     const gameInfo = installations[game] || {
         progress: 0
     };
 
-    response.setHeader('Content-type', 'application/json');
-    response.write(JSON.stringify(gameInfo));
-    response.end();
+    return gameInfo;
 }
 
-function installGame(request, response, path) {
-    const game = path.match(/\/([^\/]*)$/)[1];
+function installGame(game) {
     installations[game] = {
         progress: 0
     };
@@ -231,17 +203,13 @@ function installGame(request, response, path) {
         if (code === 0)
             installations[game].progress = 1;
     });
-
-    response.setHeader('Content-type', 'application/json');
-    response.end();
 }
 
-function getLaunchStatus(request,response,path) {
+function getLaunchStatus() {
 
 }
 
-function launchGame(request, response, path) {
-    const game = path.match(/\/([^\/]*)$/)[1];
+function launchGame(game) {
     if (!game) {
         console.err("gameName not found");
     }
@@ -256,18 +224,11 @@ function launchGame(request, response, path) {
     proc.on('close', code => {
         console.log(`Game: ${game} finished with code ${code}`);
     });
-    response.setHeader('Content-type', 'text');
-    response.write(`Launching ${game}`);
-    response.end();
+    return true;
 }
 
-function checkGameInstall(request, response, path) {
-    const game = path.match(/\/([^\/]*)$/)[1];
+function checkGameInstall(game) {
     const symLinkLoc = "/var/tmp/dcs-get/bin/" + game;
     var check = fs.existsSync(symLinkLoc);
-    response.setHeader('Content-type', 'application/json');
-    response.write(JSON.stringify({
-        found: check
-    }));
-    response.end();
+    return check;
 }
