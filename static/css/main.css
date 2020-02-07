@@ -33,7 +33,7 @@
   --ticket_tag: #383A46;
   --ticket_tag_hover: #1D1F2B;
 
-  --sidebar_width: 24em;
+  --sidebar_width: 20em;
 
   --discord_purple: #23232B;
 
@@ -92,7 +92,7 @@ p {
   line-height: 1.4;
 }
 
-button {
+button, .button {
   border-radius: 3px;
   border: none;
 
@@ -100,7 +100,29 @@ button {
   font-size: 14px;
   font-weight: bold;
 }
-button:active {
+
+.dev-credit.dev-credit.dev-credit {
+  margin-top: 20em;
+}
+
+.dev-credit p {
+  font-size: 13px;
+  font-family: "Ubuntu Mono", Consolas, "Liberation Mono", Courier, monospace;
+
+  color: var(--ticket_body);
+}
+
+.dev-credit p a {
+  color: white;
+}
+
+.button {
+  text-align: center;
+  line-height: 3em;
+  text-decoration: none;
+}
+
+button:active, .button:active {
   transform: translateY(1px);
 }
 
@@ -151,14 +173,6 @@ button:active {
 .button-red:hover {
   background-color: var(--button_red_active);
 }
-
-.disable-select {
-    user-select: none; /* supported by Chrome and Opera */
-   -webkit-user-select: none; /* Safari */
-   -khtml-user-select: none; /* Konqueror HTML */
-   -moz-user-select: none; /* Firefox */
-   -ms-user-select: none; /* Internet Explorer/Edge */
-}
 /* General END */
 
 
@@ -193,17 +207,14 @@ button:active {
 
 /* Sidebar */
 .sidebar {
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
-  height: 100%;
+  height: 100vh;
   width: var(--sidebar_width);
-  float: left;
 
   background-color: var(--warwickgg_black);
-  /*border-right: solid 2px var(--warwickgg_black);*/
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
@@ -221,9 +232,7 @@ button:active {
 
 .sidebar-block {
   width: 80%;
-  margin-top: 3em;
-  margin-right: auto;
-  margin-left: auto;
+  margin-top: 2em;
 }
 
 .sidebar-block h4 {
@@ -236,54 +245,48 @@ button:active {
   margin-bottom: 0.5em;
 }
 
-.sidebar-block button {
+.sidebar-block button,
+.sidebar-block .button {
   position: relative;
   height: 3em;
-  width: 19em;
+  width: 100%;
   margin-bottom: 1em;
 }
 
-.sidebar-block button .fab {
+.sidebar-block button .fab,
+.sidebar-block .button .fab {
   margin-left: 0.5em;
   opacity: 0.70;
 }
 
 .utilities {
-  margin-top: 8em;
+  margin-top: 2em;
 }
 
 .search-bar {
-  width: 50%;
+  width: 90%;
   border: none;
   border-radius: 6px;
-  padding: 0.6em 0.5em;
+  padding: 0.8em 0.5em;
 
   color: white;
   background-color: var(--warwickgg_dark_grey);
-
-  transition: width 0.5s;
 }
 ::-webkit-input-placeholder {  /* Chrome/Opera/Safari */
   color: white;
-}
-.search-bar:focus {
-  width: 80%;
 }
 /* Sidebar END */
 
 
 
 /* Game tickets */
+main {
+  display: flex;
+}
+
 .games {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  margin: 0 0 0 var(--sidebar_width);
-  padding: 2em 0 0 0;
-
+  flex-grow: 1;
+  height: 100vh;
   overflow-y: scroll;
 }
 
@@ -291,7 +294,7 @@ button:active {
   width: 53em;
   margin: 0 auto 1em auto;
   padding: 1em;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: var(--ticket_bg);
 
   overflow-y: hidden;
@@ -300,15 +303,16 @@ button:active {
 
   transition: border-radius 0.2s;
 }
-.game-ticket:hover {
-  border-radius: 1px;
+
+.game-ticket:first-child {
+  margin-top: 1em;
 }
 
 .game-icon {
   height: 13em;
   width: 13em;
   display: block;
-  border-radius: 10px;
+  border-radius: 6px;
 
   flex-shrink: 0;
 }
@@ -327,8 +331,9 @@ button:active {
 .game-ticket-content {
   display: flex;
   position: relative;
-  margin: 0 0 0 1em;
-  padding: 0 0 0 1em;
+  margin-left: 2em;
+
+  width: 100%;
 
   flex-direction: column;
 
@@ -412,6 +417,8 @@ button:active {
 .pop-up-background {
   position: absolute;
   display: none;
+  top: 0;
+  left: 0;
   z-index: 100;
 
   width: 100%;

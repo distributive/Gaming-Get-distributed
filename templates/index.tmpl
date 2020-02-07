@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <!--
-	Gaming Get - distributed
+	Gaming Get
 
 	IF YOU ARE AT FRIDAY NIGHT GAMING, QUIT MESSING WITH THE MACHINE AND PLAY SOME GAMES
 
@@ -9,20 +9,20 @@
 -->
 <html>
 	<head>
-	<title>Gaming Get - distributed</title>
+	<title>Gaming Get</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="static/css/main.css" />
+		<link rel="stylesheet" href="css/main.css" />
 
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 		<!-- Favicons -->
-		<link rel="icon" sizes="228x228" href="static/favicon-228.png">
-		<link rel="icon" sizes="128x128" href="static/favicon-128.png">
-		<link rel="icon" sizes="96x96" href="static/favicon-96.png">
-		<link rel="icon" sizes="32x32" href="static/favicon-32.png">
-		<link rel="shortcut icon" sizes="196x196" href="static/favicon-196.png">
+		<link rel="icon" sizes="228x228" href="favicon-228.png">
+		<link rel="icon" sizes="128x128" href="favicon-128.png">
+		<link rel="icon" sizes="96x96" href="favicon-96.png">
+		<link rel="icon" sizes="32x32" href="favicon-32.png">
+		<link rel="shortcut icon" sizes="196x196" href="favicon-196.png">
 
 		<!-- FontAwesome -->
 		<script src="https://kit.fontawesome.com/13a6fc8427.js"></script>
@@ -33,47 +33,50 @@
 		<link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
 		<!-- Local scripts -->
-		<script type="text/javascript" src="static/js/search.js"></script>
-		<script type="text/javascript" src="static/js/sidebar.js"></script>
-		<script type="text/javascript" src="static/js/games.js"></script>
-		<script type="text/javascript" src="static/js/vive.js"></script>
+		<script type="text/javascript" src="js/search.js"></script>
+		<script type="text/javascript" src="js/sidebar.js"></script>
+		<script type="text/javascript" src="js/games.js"></script>
+		<script type="text/javascript" src="js/vive.js"></script>
 	</head>
 
   <body>
-		<main class="disable-select">
+		<main>
 			<div class="sidebar">
 				<div class="title centred">
-					<!--<h1 class="title">Gaming Get</h1>
-					<h2 class="subtitle">distributed</h2>-->
-					<img src="static/img/logo.png" draggable="false" />
+					<img src="img/logo.png" draggable="false" />
 				</div>
 
 				<div class="search-bar-container sidebar-block">
-					<!--<h4 class="centred">Search</h4>-->
-  				<input type="text" placeholder="Search..." class="search-bar centred" id="search-bar">
+					<input type="text" placeholder="Search..." class="search-bar centred" id="search-bar">
 				</div>
 
 				<div class="utilities sidebar-block">
-					<h4 class="centred">Utilities</h4>
+					<h4>Utilities</h4>
 					<button type="button" class="centred button-blue" id="button-steam">Steam<i class="fab fa-steam"></i></button>
-					<button type="button" class="centred button-blue" id="button-chrome">New Chrome Window<i class="fab fa-chrome"></i></button>
-					<button type="button" class="centred button-grey" id="button-volume">Volume Controls</button>
-					<button type="button" class="centred button-grey" id="button-mouse">Mouse Controls</button>
-					<button type="button" class="centred button-grey" id="button-resolution">Fix Resolution</button>
+					<a href="https://google.co.uk" target="_blank" class="button centred button-blue" id="button-chrome">New Chrome window<i class="fab fa-chrome"></i></a>
+					<button type="button" class="centred button-grey" id="button-volume">Volume settings</button>
+					<button type="button" class="centred button-grey" id="button-mouse">Mouse settings</button>
+					<button type="button" class="centred button-grey" id="button-resolution">Fix resolution</button>
 				</div>
 
 				<div class="links sidebar-block">
-					<h4 class="centred">Links</h4>
-					<button type="button" class="centred button-blue" id="button-vive">Sign Up For The Vive<div class="notification-icon"><b>!</b></div></button>
-					<button type="button" class="centred button-grey" id="button-food">Food Orders</button>
+					<h4>Links</h4>
+					<button type="button" class="centred button-grey" id="button-food">Food orders</button>
+					<a class="button centred button-grey" id="button-discord" href="https://discord.gg/uwcs" target="_blank">Discord</a>
 				</div>
 
 				<div class="shortcuts sidebar-block">
-					<h4 class="centred">Shortcuts</h4>
+					<h4>Shortcuts</h4>
 					<p>
 						Click tags to filter games. <br>
 						Hold ctrl to add new tags to the search list. <br>
 						Hold shift to clear the search list.
+					</p>
+				</div>
+
+				<div class="dev-credit sidebar-block">
+					<p class="text-centred">
+						Originally developed by <a href="https://github.com/distributive">distributive law</a> and maintained by members of the <a href="https://github.com/UWCS/Gaming-get-distributed/graphs/contributors">Uni of Warwick Computing Society</a>.
 					</p>
 				</div>
 			</div>
@@ -83,35 +86,15 @@
 			</div>
     </main>
 
-		<div class="pop-up-background close-pop-up disable-select">
-			<div class="pop-up-window" id="food-redirect">
-				<h4>Join our Discord</h4>
-				<div class="pop-up-window-content">
-					<img src="https://cdn.discordapp.com/icons/189453139584221185/a_d8c9f421b8c23b26788904063b79fe25.gif?size=256" draggable="false" />
-					<p>Our Discord server has a channel for organising food orders with others at events. Just look for #food-orders under the Gaming category in the channel list and ask away!</p>
-				</div>
-				<button type="button" class="centred button-blue" id="button-discord">Join</button>
+	<div class="pop-up-background close-pop-up disable-select">
+		<div class="pop-up-window" id="food-redirect">
+			<h4>Join our Discord</h4>
+			<div class="pop-up-window-content">
+				<img src="https://cdn.discordapp.com/icons/189453139584221185/a_d8c9f421b8c23b26788904063b79fe25.gif?size=256" draggable="false" />
+				<p>Our Discord server has a channel for organising food orders with others at events. Just look for #food-orders under the Gaming category in the channel list and ask away!</p>
 			</div>
-
-			<div class="pop-up-window" id="vive-list">
-				<h4>The Vive Waiting List</h4>
-				<div class="pop-up-window-content">
-					<p>Vive sessions usually last 10 minutes depending on demand. Once you are signed up you will be added to the end of the queue; if you do not turn up to your slot you may be skipped. Exec reserve the right to refuse entry to anyone at their own discretion.</p>
-					<div class="sign-up-container">
-						<input type="text" id="vive-name-input" placeholder="Your name here..." />
-						<button type="button" class="button-blue out-queue" id="button-vive-sign-up">Sign Up</button>
-					</div>
-					<h5>Current User</h5>
-					<div class="queue-ticket" id="currently-on-vive">
-					</div>
-					<h5>Up Next</h5>
-					<div class="queue-ticket" id="next-on-vive">
-					</div>
-					<h5>Queue</h5>
-					<div id="vive-queue">
-					</div>
-				</div>
-			</div>
+			<a class="button centred button-blue" id="button-discord" href="https://discord.gg/uwcs" target="_blank">Join</a>
 		</div>
+	</div>
   </body>
 </html>
